@@ -145,4 +145,4 @@ This project is licensed under the [ISC License](https://opensource.org/licenses
 
 ## 👨‍💼 Author
 
-Made with ❤️ by \[Saurabh Singh]
+Made with ❤️ by Saurabh Singh
