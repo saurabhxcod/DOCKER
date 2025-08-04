@@ -1,0 +1,36 @@
+# This is the optimized Dockerfile for a TypeScript + Express server using Multi-Stage Builds
+# It builds the application in a separate stage and then copies only the necessary files to the final
+
+FROM node:20-alpine3.20 AS base
+
+# Set the working directory
+WORKDIR /app
+
+
+
+#Builder Stage
+FROM base AS builder
+# Copy package files and install dependencies
+COPY package*.json .
+COPY tsconfig.json .
+# Install dependencies
+RUN npm install
+COPY . .
+RUN npm run build
+
+
+#Production Stage
+FROM base AS production
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/tsconfig.json ./
+# Install only production dependencies
+RUN npm install --omit=dev
+
+RUN npm cache clean --force
+
+# Expose the application port
+EXPOSE 3000 
+ENV PORT=8000
+# Start the application
+CMD ["node", "dist/index.js"]
