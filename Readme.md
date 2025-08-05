@@ -1,4 +1,3 @@
-```markdown
 # 🚀 Dockerized Express API
 
 A simple Express.js API application containerized with Docker for easy deployment and testing.
@@ -20,9 +19,9 @@ A simple Express.js API application containerized with Docker for easy deploymen
 
 ## 🧱 Built With
 
-- [Node.js](https://nodejs.org/)
-- [Express.js](https://expressjs.com/)
-- [Docker](https://www.docker.com/)
+* [Node.js](https://nodejs.org/)
+* [Express.js](https://expressjs.com/)
+* [Docker](https://www.docker.com/)
 
 ---
 
@@ -53,10 +52,10 @@ CMD ["npm", "start"]
 
 ## 🚦 Available Endpoints
 
-| Method | Endpoint     | Description                 |
-| ------ | ------------ | ---------------------------|
-| GET    | `/`          | Welcome message             |
-| GET    | `/products`  | Returns product list (JSON) |
+| Method | Endpoint    | Description                 |
+| ------ | ----------- | --------------------------- |
+| GET    | `/`         | Welcome message             |
+| GET    | `/products` | Returns product list (JSON) |
 
 ---
 
@@ -84,33 +83,33 @@ docker info                    # Display Docker system info
 ## 🔹 Working with Images
 
 ```
-docker pull              # Download image from Docker Hub
+docker pull alpine                   # Download image from Docker Hub
 docker images                        # List all downloaded images
-docker image rm               # Remove a specific image
-docker image rm alpine ubuntu        # Remove multiple images
-docker image rm --help               # Help for image removal
-docker save -o image.tar        # Save image to tar file
-docker load -i image.tar             # Load image from tar file
+docker image rm alpine              # Remove a specific image
+docker image rm alpine ubuntu       # Remove multiple images
+docker image rm --help              # Help for image removal
+docker save -o image.tar alpine     # Save image to tar file
+docker load -i image.tar            # Load image from tar file
 ```
 
 ## 🔹 Working with Containers
 
 ```
-docker run                          # Run a container
-docker run -it                      # Interactive terminal session
-docker run -d                       # Run container in background
-docker run --name mycontainer       # Name the container
-docker start                      # Start an existing container
-docker stop                       # Stop a container
-docker restart                    # Restart a container
-docker pause                      # Pause/unpause a container
-docker unpause 
-docker ps                                  # List running containers
-docker ps -a                               # List all containers (incl. stopped)
-docker container ls                        # Same as docker ps
-docker container ls -a                     # All containers
-docker rm                         # Remove a stopped container
-docker rm -f                           # Force remove a container
+docker run alpine                        # Run a container
+docker run -it alpine                    # Interactive terminal session
+docker run -d alpine                     # Run container in background
+docker run --name mycontainer alpine    # Name the container
+docker start mycontainer                # Start an existing container
+docker stop mycontainer                 # Stop a container
+docker restart mycontainer              # Restart a container
+docker pause mycontainer                # Pause a container
+docker unpause mycontainer              # Unpause a container
+docker ps                               # List running containers
+docker ps -a                            # List all containers (incl. stopped)
+docker container ls                     # Same as docker ps
+docker container ls -a                  # All containers
+docker rm mycontainer                   # Remove a stopped container
+docker rm -f mycontainer                # Force remove a container
 ```
 
 ## 🔹 Help Commands and Common Mistakes
@@ -119,8 +118,9 @@ docker rm -f                           # Force remove a container
 docker container --help    # Help for container commands
 docker image --help        # Help for image commands
 ```
-- **Typo Alert:** 'doxker'/ 'dokcer', 'exir'
-- **Wrong:** `docker images rm ubuntu` ❌ | **Correct:** `docker image rm ubuntu` ✅
+
+* **Typo Alert:** 'doxker'/ 'dokcer', 'exir'
+* **Wrong:** `docker images rm ubuntu` ❌ | **Correct:** `docker image rm ubuntu` ✅
 
 ## 🔹 Exit Container
 
@@ -132,20 +132,20 @@ exit   # Exit from inside a container
 
 ## 📝 Dockerfile Notes
 
-- **Build Image:**  
+* **Build Image:**
   `docker build -t expressapp .`
-- **Host Machine Port Mapping:**  
+* **Host Machine Port Mapping:**
   `docker run -it -p 8000:3000 expressapp`
-- **Multiple Port Mapping:**  
+* **Multiple Port Mapping:**
   `docker run -it -p 8000:3000 -p 3001:3000 expressapp`
-- **Automated Port Mapping (Expose):**  
+* **Automated Port Mapping (Expose):**
   `docker run -it -P expressapp`
-- **Detached Terminal:**  
+* **Detached Terminal:**
   `docker run -itd -P expressapp`
 
 ---
 
-## 🐳 Docker Hub Commands
+## 🔗 Docker Hub Commands
 
 ```
 docker build -t saurabhsingh454/express-app .
@@ -156,10 +156,10 @@ docker pull saurabhsingh454/express-app:latest
 
 ---
 
-## 🧩 Multistage Build (Dockerfile Pattern)
+## 🤩 Multistage Build (Dockerfile Pattern)
 
-- Use multiple `FROM` instructions to separate build dependencies from production.
-- Minimizes image size and enhances security.
+* Use multiple `FROM` instructions to separate build dependencies from production.
+* Minimizes image size and enhances security.
 
 ```
 FROM node:20-alpine as builder
@@ -173,72 +173,105 @@ FROM node:20-alpine
 
 ## 🔗 Docker Networking
 
-- **List, Inspect, Create Networks:**
-    ```
-    docker network ls
-    docker network inspect bridge
-    docker network create saurabhnet
-    ```
-- **Attach Containers to Network:**
-    ```
-    docker run -itd --network=saurabhnet --rm --name=alpine_container alpine
-    docker exec alpine_container ping alpine_container_2
-    ```
-- **Connect/Disconnect between Networks:**
-    ```
-    docker network connect saurabhnet busybox_container
-    docker network disconnect saurabhnet busybox_container
-    ```
+* **List, Inspect, Create Networks:**
+
+  ```
+  docker network ls
+  docker network inspect bridge
+  docker network create saurabhnet
+  ```
+* **Attach Containers to Network:**
+
+  ```
+  docker run -itd --network=saurabhnet --rm --name=alpine_container alpine
+  docker exec alpine_container ping alpine_container_2
+  ```
+* **Connect/Disconnect between Networks:**
+
+  ```
+  docker network connect saurabhnet busybox_container
+  docker network disconnect saurabhnet busybox_container
+  ```
 
 ---
 
 ## 💾 Docker Volumes
 
-- **Preferred for persistent container data.**
+* **Preferred for persistent container data.**
 
 ```
 docker volume create my_data
 docker volume ls
 docker run -it --rm -v my_data:/home ubuntu
 ```
-- Files created in `/home` inside container persist on volume.
+
+* Files created in `/home` inside container persist on volume.
 
 ---
 
-## 🛠 Docker Compose
+## ⚒️ Docker Compose
 
-- **`docker-compose.yml` Example:**
+* **`docker-compose.yml` Example:**
 
-    ```
-    services:
-      service_name:
-        image: image_name
-        container_name: custom_name
-        ports:
-          - "host:container"
-        volumes:
-          - ./host_path:/container_path
-        environment:
-          - VAR_NAME=value
-        networks:
-          - network_name
-    volumes:
-      volume_name:
-    networks:
-      network_name:
-        driver: bridge
-    ```
+  ```yaml
+  version: '3.8'
+  services:
+    nignx:
+      image: nginx:latest
+      container_name: nginx_container
+      ports:
+        - "80:80"
+      volumes:
+        - ./nginx_data:/usr/share/nginx/html
+      networks:
+        - my_network
+      environment:
+        - NGINX_HOST=localhost
+        - NGINX_PORT=80
 
-- **Compose Commands:**
-    ```
-    docker compose up                # Create & start containers
-    docker compose up -d             # Detached
-    docker compose down              # Stop and remove
-    docker compose ps                # List running
-    docker compose logs              # Show logs
-    docker compose build             # Build/rebuild images
-    docker compose stop/start        # Stop/start services
-    ```
+    alpine:
+      image: alpine:latest
+      container_name: alpine_container
+      networks:
+        - my_network
+      volumes:
+        - ./alpine_data:/data
+      environment:
+        - ALPINE_PORT=8080
+
+    redis:
+      image: redis:latest
+      container_name: redis_container
+      ports:
+        - "6379:6379"
+      networks:
+        - my_network
+      volumes:
+        - redis_data:/data
+      environment:
+        - REDIS_PORT=6379
+
+  volumes:
+    redis_data:
+    nginx_data:
+    alpine_data:
+
+  networks:
+    my_network:
+      driver: bridge
+  ```
+
+* **Compose Commands:**
+
+  ```
+  docker compose up                # Create & start containers
+  docker compose up -d             # Detached
+  docker compose down              # Stop and remove
+  docker compose ps                # List running
+  docker compose logs              # Show logs
+  docker compose build             # Build/rebuild images
+  docker compose stop/start        # Stop/start services
+  ```
 
 ---
 
@@ -268,6 +301,5 @@ Made with ❤️ by Saurabh Singh
 
 ---
 
-**Happy Dockerizing!**  
+**Happy Dockerizing!**
 Keep this as your reference—add more notes, improve examples, and level up your knowledge!
-```
